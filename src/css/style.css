@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+:root {
+  --font-body: 'IBM Plex Sans', Verdana, sans-serif;
+  --font-headline: 'Fjalla One', Helvetica, sans-serif;
+  /* colors */
+  --primary-color: #1b1a17;
+  --secondary-color: #2ff4b9;
+  --tertiary-color: #e6e6ea;
+  --dark-grey: #292823;
+
+  /* sizes */
+  --font-base: 16px;
+  --small-font: 0.8rem;
+  --large-font: 1.2rem;
+  --border-radius: 0.3rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--font-base);
+  background-color: var(--primary-color);
+  color: var(--tertiary-color);
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Header styles */
+header {
+  margin: 0.8rem 0;
+  position: relative;
+}
+
+.links-nav {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  margin: 0;
+}
+
+.links-nav li {
+  flex: 1;
+}
+
+.links-nav li a {
+  font-family: var(--font-headline);
+  letter-spacing: 0.5px;
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: var(--secondary-color);
+}
+
+#logo {
+  flex: none;
+}
+
+.line-header {
+  background: radial-gradient(
+    circle at center,
+    var(--secondary-color),
+    transparent 105%
+  );
+  height: 1px;
+  width: 100%;
+  position: absolute;
+  top: 65%;
+  z-index: -1;
+}
+
+/* footer styles */
+.footer-ele {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  background-color: var(--dark-grey);
+  padding: 0.8rem;
+  justify-content: space-between;
+}
+
+.footer-ele a {
+  text-decoration: none;
+  color: var(--tertiary-color);
+  font-family: var(--font-headline);
+  letter-spacing: 0.5px;
+}
+
+#logo-foot {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#logo-foot p {
+  font-size: larger;
+}
+
+.links-foot {
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+  justify-content: center;
+}
