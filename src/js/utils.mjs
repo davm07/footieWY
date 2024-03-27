@@ -20,11 +20,21 @@ export function renderWithTemplate(template, parent, data, callback) {
 export async function loadHeaderFooter() {
   const header = await loadTemplate('../partials/header.html');
   const footer = await loadTemplate('../partials/footer.html');
+
   const headerElement = document.querySelector('#header');
   const footerElement = document.querySelector('#footer');
 
   renderWithTemplate(header, headerElement);
   renderWithTemplate(footer, footerElement);
+
+  const body = document.querySelector('body');
+  const menuButton = document.querySelector('.menu-btn');
+  const navigation = document.querySelector('.links-nav');
+  menuButton.addEventListener('click', () => {
+    menuButton.classList.toggle('opened');
+    navigation.classList.toggle('open');
+    body.classList.toggle('stop-scroll');
+  });
 }
 
 // create a template element to render the header and footer
