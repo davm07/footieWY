@@ -13,7 +13,7 @@
   --font-base: 16px;
   --small-font: 0.8rem;
   --large-font: 1.2rem;
-  --border-radius: 0.3rem;
+  --border-radius: 0.5rem;
 }
 
 * {
@@ -39,6 +39,11 @@ h4,
 h5,
 h6 {
   font-family: var(--font-headline);
+}
+
+main {
+  margin: 0 auto;
+  max-width: 1280px;
 }
 
 /* Header styles */
@@ -165,6 +170,83 @@ header {
   stroke-dasharray: 90 207;
   stroke-dashoffset: -134;
   stroke-width: 6;
+}
+
+/* Hero section styles */
+.divider {
+  margin-bottom: 2rem;
+  padding: 0.8rem;
+}
+
+.hero-img {
+  max-width: 500px;
+  margin: 2.5rem 0;
+}
+
+.hero-msg h2 {
+  font-family: var(--font-headline);
+  color: var(--tertiary-color);
+  margin: 0;
+}
+
+/* Browse competitions button style */
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+#searchCompts {
+  background-color: var(--tertiary-color);
+  color: var(--primary-color);
+  padding: 0.8rem;
+  text-decoration: none;
+  font-family: var(--font-headline);
+}
+
+/* Latest matches section styles */
+.latest-matches {
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.match-container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dark-grey);
+  color: var(--tertiary-color);
+  text-align: center;
+  border-radius: var(--border-radius);
+  margin-bottom: 1.5rem;
+}
+
+.matchInfo {
+  display: flex;
+  flex-direction: row;
+}
+
+.teamHome,
+.teamAway {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.teamLogo {
+  display: flex;
+  align-items: center;
+  height: 100px;
+}
+
+.teamLogo img {
+  width: 70%;
+  max-width: 100px;
+  margin: auto;
+}
+
+.match-status p {
+  font-weight: bold;
 }
 
 /* footer styles */
