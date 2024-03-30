@@ -1,19 +1,5 @@
 import { renderListWithTemplate } from './utils.mjs';
 
-const BASE_URL = import.meta.env.VITE_SERVER_URL;
-const API_KEY = import.meta.env.VITE_API_KEY;
-const API_HOST = import.meta.env.VITE_API_HOST;
-
-let myHeaders = new Headers();
-myHeaders.append('x-rapidapi-key', API_KEY);
-myHeaders.append('x-rapidapi-host', API_HOST);
-
-const requestOptions = {
-  method: 'GET',
-  headers: myHeaders,
-  redirect: 'follow',
-};
-
 function matchCardTemplate(element) {
   return `<div class="match-container" data-id="${element.fixture.id}">
             <div class="leagueInfo">
@@ -23,9 +9,9 @@ function matchCardTemplate(element) {
             <div class="matchInfo">
               <div class="teamHome" data-id="${element.teams.home.id}">
                 <div class="teamLogo">
-                  <img src="${element.teams.home.logo}" alt="${element.teams.home.name}">
+                  <img src="https://test-api-sports-davm.b-cdn.net/football/teams/${element.teams.home.id}.png" alt="${element.teams.home.name}" loading="lazy">
                 </div>
-                <h4>${element.teams.home.name}</h4>
+                <h4 class="teamTitle">${element.teams.home.name}</h4>
                 <p>${element.goals.home}</p>
               </div>
               <div class="match-status">
@@ -34,9 +20,9 @@ function matchCardTemplate(element) {
               </div>
               <div class="teamAway" data-id="${element.teams.away.id}">
                 <div class="teamLogo">
-                  <img src="${element.teams.away.logo}" alt="${element.teams.away.name}">
+                  <img src="https://test-api-sports-davm.b-cdn.net/football/teams/${element.teams.away.id}.png" alt="${element.teams.away.name}">
                 </div>
-                <h4>${element.teams.away.name}</h4>
+                <h4 class="teamTitle">${element.teams.away.name}</h4>
                 <p>${element.goals.away}</p>
               </div>
             </div>
@@ -49,7 +35,7 @@ export default class MatchDetails {
     this.parentElement = parentElement;
   }
 
-  async init() {
+  async initMatch() {
     const matchData = await this.dataSource.getFixtures();
     console.log(matchData);
     if (matchData != null && matchData.length > 0) {

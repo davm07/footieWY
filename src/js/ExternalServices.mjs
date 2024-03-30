@@ -27,4 +27,19 @@ export default class ExternalServices {
       console.log(err);
     }
   }
+
+  async getTopLeagues() {
+    let leagues_ids = [39, 140, 78, 61, 135];
+    try {
+      const response = await fetch(`${BASE_URL}leagues`, requestOptions);
+      const data = await response.json();
+      const elements = data.response;
+      const topLeagues = elements.filter((item) =>
+        leagues_ids.includes(item.league.id),
+      );
+      return topLeagues;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
