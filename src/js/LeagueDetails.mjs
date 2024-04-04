@@ -38,6 +38,7 @@ function leagueTableElements(element) {
             <td data-cell="Season" class="fade-transition">${element.seasons.at(-1).year}</td>
             <td data-cell="Season start" class="fade-transition">${element.seasons.at(-1).start}</td>
             <td data-cell="Season end" class="fade-transition">${element.seasons.at(-1).end}</td>
+            <td data-cell="Details" class="fade-transition"><a href="league-detail.html?leagueId=${element.league.id}&season=${element.seasons.at(-1).year}" class="league-link">Show ${element.league.name} details &#8599</a></td>
           </tr>`;
 }
 

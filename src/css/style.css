@@ -418,6 +418,10 @@ td::before {
   font-weight: bold;
 }
 
+.league-link {
+  color: var(--tertiary-color);
+}
+
 #paginationBtn {
   display: flex;
   justify-content: center;
@@ -431,6 +435,7 @@ td::before {
   background-color: var(--secondary-color);
   border-radius: var(--border-radius);
   color: var(--primary-color);
+  padding: 0.2rem 0.5rem;
 }
 
 .labelInput {
