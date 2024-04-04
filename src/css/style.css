@@ -303,6 +303,7 @@ header {
 
 .leagueTitle {
   color: var(--primary-color);
+  font-size: medium;
 }
 
 .leagueCountry {
@@ -352,4 +353,112 @@ header {
   flex-direction: column;
   text-align: end;
   justify-content: center;
+}
+
+/* ------------ Leagues Table Page styles ------------ */
+#myLeaguesCont {
+  width: 100%;
+}
+
+.table-leagues h2 {
+  margin-top: 0;
+}
+
+.fade-transition {
+  animation: myEntrance 0.5s ease;
+}
+
+@keyframes myEntrance {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.containerName {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tableImg {
+  height: 25px;
+  vertical-align: middle;
+}
+
+th {
+  text-align: left;
+}
+
+tr:nth-of-type(2n-1) {
+  background-color: var(--dark-grey);
+}
+
+th,
+td {
+  padding: 0.5rem;
+}
+
+th {
+  display: none;
+}
+
+td {
+  display: grid;
+  grid-template-columns: 10ch auto;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+td::before {
+  content: attr(data-cell) ': ';
+  font-weight: bold;
+}
+
+#paginationBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 0.2rem;
+}
+
+.pageBtn {
+  border: none;
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+  color: var(--primary-color);
+}
+
+.labelInput {
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.inputLeagues {
+  border: none;
+  padding: 0.3rem;
+  border-radius: var(--border-radius);
+}
+
+.inputLeagues:focus {
+  outline: none;
+}
+
+@media screen and (min-width: 600px) {
+  th,
+  td {
+    display: table-cell;
+  }
+
+  th {
+    font-size: 0.8rem;
+  }
+
+  td::before {
+    content: '';
+  }
 }

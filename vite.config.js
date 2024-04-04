@@ -9,6 +9,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'src/index.html'),
+        leagues: resolve(__dirname, 'src/leagues/index.html'),
       },
     },
   },

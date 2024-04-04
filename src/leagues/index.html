@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/favicon_io/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon_io/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon_io/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/images/favicon_io/site.webmanifest" />
+    <title>Leagues/Competitions</title>
+    <script type="module" src="../js/leagues.js"></script>
+  </head>
+
+  <body>
+    <header id="header"></header>
+    <main>
+      <section class="table-leagues divider">
+        <h2>Leagues/Competitions</h2>
+        <label class="labelInput">
+          Search leagues (By Name):
+          <input id="searchLeague" class="inputLeagues" type="text" />
+        </label>
+        <table id="myLeaguesCont">
+          <thead>
+            <tr>
+              <th>Country</th>
+              <th>Name</th>
+              <th>Season</th>
+              <th>Season start</th>
+              <th>Season end</th>
+            </tr>
+          </thead>
+          <tbody id="leaguesContent"></tbody>
+        </table>
+        <div id="paginationBtn"></div>
+      </section>
+    </main>
+    <footer id="footer"></footer>
+  </body>
+</html>
