@@ -108,6 +108,10 @@ function searchLeagues(value, leaguesList) {
   return filteredLeagues;
 }
 
+function leagueInfoSection(element) {
+  return `<h2>${element.league.name} - ${element.league.country}<div class="imgLeagueInfo"><img src="https://test-api-sports-davm.b-cdn.net/football/leagues/${element.league.id}.png" alt="${element.league.name} - ${element.league.country}" loading="lazy"></div></h2>`;
+}
+
 export default class LeagueDetails {
   constructor(parentElement) {
     this.parentElement = parentElement;
@@ -177,6 +181,33 @@ export default class LeagueDetails {
     }
   }
 
+  async initLeagueInfo(leagueId, seasonYear) {
+    const leagueInfo = await this.getLeagueInfo(leagueId, seasonYear);
+    this.renderLeagueInfo(leagueInfo.leagueInfo);
+  }
+
+  async getLeagueInfo(leagueId, seasonYear) {
+    try {
+      const responseLeague = await fetch(
+        `${BASE_URL}standings?league=${leagueId}&season=${seasonYear}`,
+        requestOptions,
+      );
+      const responseGames = await fetch(
+        `${BASE_URL}fixtures?league=${leagueId}&season=${seasonYear}&next=10`,
+        requestOptions,
+      );
+      const dataLeague = await responseLeague.json();
+      const dataLeagueGames = await responseGames.json();
+      console.log(dataLeagueGames.response);
+      return {
+        leagueInfo: dataLeague.response,
+        leagueGames: dataLeagueGames.response,
+      };
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   renderCurrentLeagues(listElements) {
     const leaguesList = listElements;
     state.querySet = leaguesList;
@@ -197,6 +228,10 @@ export default class LeagueDetails {
         this.renderCurrentLeagues(state.querySet);
       });
     });
+  }
+
+  renderLeagueInfo(list) {
+    renderListWithTemplate(leagueInfoSection, this.parentElement, list);
   }
 
   renderDataTopLeagues(list) {

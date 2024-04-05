@@ -26,6 +26,7 @@ body {
   font-size: var(--font-base);
   background-color: var(--primary-color);
   color: var(--tertiary-color);
+  min-width: 320px;
 }
 
 img {
@@ -451,6 +452,19 @@ td::before {
 
 .inputLeagues:focus {
   outline: none;
+}
+
+/* ------------ Leagues Table Page styles ------------ */
+.league-info h2 {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+
+.imgLeagueInfo img {
+  height: 60px;
 }
 
 @media screen and (min-width: 600px) {
