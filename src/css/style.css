@@ -27,6 +27,7 @@ body {
   background-color: var(--primary-color);
   color: var(--tertiary-color);
   min-width: 320px;
+  animation: myEntrance 800ms ease-in;
 }
 
 img {
@@ -45,6 +46,16 @@ h6 {
 main {
   margin: 0 auto;
   max-width: 1280px;
+}
+
+/* Load animation to all pages */
+@keyframes myEntrance {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Header styles */
@@ -225,12 +236,6 @@ header {
   border-radius: var(--border-radius);
 }
 
-.latest-matches.divider {
-  animation: none;
-  animation-timeline: none;
-  animation-range: normal;
-}
-
 #matches-container > .match-container {
   animation: in-and-out linear both;
   animation-timeline: view();
@@ -387,15 +392,6 @@ header {
 
 .fade-transition {
   animation: myEntrance 0.8s ease;
-}
-
-@keyframes myEntrance {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }
 
 .containerName {
