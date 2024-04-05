@@ -177,6 +177,9 @@ header {
 .divider {
   margin-bottom: 1.5rem;
   padding: 0.8rem;
+  animation: myEntrance linear both;
+  animation-timeline: view();
+  animation-range: entry 35% cover 35%;
 }
 
 .hero-img {
@@ -220,6 +223,17 @@ header {
 .latest-matches::-webkit-scrollbar-thumb {
   background-color: var(--dark-grey);
   border-radius: var(--border-radius);
+}
+
+.latest-matches.divider {
+  animation: none;
+  animation-timeline: none;
+  animation-range: normal;
+}
+
+#matches-container > .match-container {
+  animation: in-and-out linear both;
+  animation-timeline: view();
 }
 
 .match-container {
@@ -361,12 +375,18 @@ header {
   width: 100%;
 }
 
+.table-leagues.divider {
+  animation: none;
+  animation-timeline: none;
+  animation-range: none;
+}
+
 .table-leagues h2 {
   margin-top: 0;
 }
 
 .fade-transition {
-  animation: myEntrance 0.5s ease;
+  animation: myEntrance 0.8s ease;
 }
 
 @keyframes myEntrance {
@@ -470,6 +490,12 @@ td::before {
 }
 
 /* ------------ Leagues Table Page styles ------------ */
+.league-info.divider {
+  animation: none;
+  animation-timeline: none;
+  animation-range: none;
+}
+
 .league-info h2 {
   margin: 0;
   display: flex;
@@ -543,6 +569,37 @@ td::before {
 .gameStadium {
   font-size: small;
   margin-top: 0;
+}
+
+.gamesContainer > div {
+  animation: in-and-out linear both;
+  animation-timeline: view(x);
+}
+
+@keyframes in-and-out {
+  entry 0% {
+    opacity: 0;
+  }
+
+  entry 50% {
+    opacity: 1;
+  }
+
+  entry 100% {
+    opacity: 1;
+  }
+
+  exit 0% {
+    opacity: 1;
+  }
+
+  exit 50% {
+    opacity: 1;
+  }
+
+  exit 100% {
+    opacity: 0;
+  }
 }
 
 @media screen and (min-width: 600px) {
