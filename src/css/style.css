@@ -408,6 +408,10 @@ header {
   display: none;
 }
 
+.containerName + a {
+  color: var(--tertiary-color);
+}
+
 .tableImg {
   height: 25px;
   vertical-align: middle;
