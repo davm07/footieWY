@@ -397,6 +397,13 @@ header {
   vertical-align: middle;
 }
 
+caption {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-headline);
+}
+
 caption,
 th {
   text-align: left;
