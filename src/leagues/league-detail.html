@@ -1,24 +1,65 @@
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon_io/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_io/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_io/favicon-16x16.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/favicon_io/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon_io/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon_io/favicon-16x16.png"
+    />
     <link rel="manifest" href="/images/favicon_io/site.webmanifest" />
     <title>League/Competition Details</title>
     <script type="module" src="../js/league-details.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <header id="header"></header>
     <main>
-        <section class="league-info divider"></section>
+      <section class="league-info divider">
+        <div class="teamsContainer">
+          <table id="myPositionsCont">
+            <caption>
+              Positions
+            </caption>
+            <thead>
+              <tr>
+                <th>Position</th>
+                <th>Club</th>
+                <th>Played</th>
+                <th>Won</th>
+                <th>Drawn</th>
+                <th>Lost</th>
+                <th title="Goals For">GF</th>
+                <th title="Goals Against">GA</th>
+                <th title="Goals For">GD</th>
+                <th title="Goal Difference">Points</th>
+              </tr>
+            </thead>
+            <tbody id="teamsPosition"></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="leagueGamesCont divider">
+        <h3>Current Games</h3>
+        <div id="leagueGamesLive" class="gamesContainer"></div>
+        <h3>Next Games</h3>
+        <div id="leagueGames" class="gamesContainer"></div>
+      </section>
     </main>
     <footer id="footer"></footer>
-</body>
-
+  </body>
 </html>

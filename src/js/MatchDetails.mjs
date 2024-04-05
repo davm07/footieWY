@@ -43,6 +43,35 @@ function matchCardTemplate(element) {
           </div>`;
 }
 
+function matchCardLeagueTemplate(element) {
+  return `<div class="match-container" data-id="${element.fixture.id}">
+            <div class="leagueInfo">
+              <h3 data-id="time" class="gameDate">${new Date(element.fixture.date).toDateString()}</h3>
+              <p class="gameStadium"><b>Stadium:</b> ${element.fixture.venue.name}</p>
+            </div>
+            <div class="matchInfo">
+              <div class="teamHome" data-id="${element.teams.home.id}">
+                <div class="teamLogo">
+                  <img src="https://test-api-sports-davm.b-cdn.net/football/teams/${element.teams.home.id}.png" alt="${element.teams.home.name}" loading="lazy">
+                </div>
+                <h4 class="teamTitle">${element.teams.home.name}</h4>
+                <p>${element.goals.home !== null ? element.goals.home : 0}</p>
+              </div>
+              <div class="match-status">
+                <p>VS</p>
+                <p>${element.fixture.status.elapsed !== null ? element.fixture.status.elapsed : element.fixture.status.long}</p>
+              </div>
+              <div class="teamAway" data-id="${element.teams.away.id}">
+                <div class="teamLogo">
+                  <img src="https://test-api-sports-davm.b-cdn.net/football/teams/${element.teams.away.id}.png" alt="${element.teams.away.name}">
+                </div>
+                <h4 class="teamTitle">${element.teams.away.name}</h4>
+                <p>${element.goals.away !== null ? element.goals.away : 0}</p>
+              </div>
+            </div>
+          </div>`;
+}
+
 export default class MatchDetails {
   constructor(parentElement) {
     this.parentElement = parentElement;
@@ -70,7 +99,49 @@ export default class MatchDetails {
     }
   }
 
+  async renderLeagueCurrentFixtures(leagueId, seasonYear, sectionElement) {
+    try {
+      const responseGames = await fetch(
+        `${BASE_URL}fixtures?league=${leagueId}&season=${seasonYear}&live=all`,
+        requestOptions,
+      );
+      const dataLeagueGames = await responseGames.json();
+      if (dataLeagueGames.response.length > 0) {
+        renderListWithTemplate(
+          matchCardTemplate,
+          sectionElement,
+          dataLeagueGames.response,
+        );
+      } else {
+        sectionElement.innerHTML = `<p>There are no matches available</p>`;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async renderLeagueFixtures(leagueId, seasonYear) {
+    try {
+      const responseGames = await fetch(
+        `${BASE_URL}fixtures?league=${leagueId}&season=${seasonYear}&next=10`,
+        requestOptions,
+      );
+      const dataLeagueGames = await responseGames.json();
+      if (dataLeagueGames.response.length > 0) {
+        this.renderLeagueGamesData(dataLeagueGames.response);
+      } else {
+        this.parentElement.innerHTML = `<p>There are no matches available</p>`;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   renderData(list) {
     renderListWithTemplate(matchCardTemplate, this.parentElement, list);
+  }
+
+  renderLeagueGamesData(list) {
+    renderListWithTemplate(matchCardLeagueTemplate, this.parentElement, list);
   }
 }

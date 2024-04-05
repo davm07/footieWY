@@ -108,8 +108,30 @@ function searchLeagues(value, leaguesList) {
   return filteredLeagues;
 }
 
+function leagueTitle(list, parentElement) {
+  const leagueTitleH2 = `<h2><div class="imgLeagueInfo"><img src="https://test-api-sports-davm.b-cdn.net/football/leagues/${list[0].league.id}.png" alt="${list[0].league.name} - ${list[0].league.country}" loading="lazy"></div>${list[0].league.name} - ${list[0].league.country}</h2>`;
+  parentElement.insertAdjacentHTML('afterbegin', leagueTitleH2);
+}
+
 function leagueInfoSection(element) {
-  return `<h2>${element.league.name} - ${element.league.country}<div class="imgLeagueInfo"><img src="https://test-api-sports-davm.b-cdn.net/football/leagues/${element.league.id}.png" alt="${element.league.name} - ${element.league.country}" loading="lazy"></div></h2>`;
+  const standings = element.league.standings[0];
+  let html = '';
+  standings.forEach((club) => {
+    html += `<tr>
+            <td data-cell="Position" class="fade-transition">${club.rank}</td>
+            <td data-cell="Club" class="fade-transition"><div class="containerName"><img src="https://test-api-sports-davm.b-cdn.net/football/teams/${club.team.id}.png" alt="${club.team.name}" loading="lazy" class="tableImg"><span>${club.team.name}</span></div></td>
+            <td data-cell="Played" class="fade-transition">${club.all.played}</td>
+            <td data-cell="Won" class="fade-transition">${club.all.win}</td>
+            <td data-cell="Drawn" class="fade-transition">${club.all.draw}</td>
+            <td data-cell="Lost" class="fade-transition">${club.all.lose}</td>
+            <td data-cell="Goals For" class="fade-transition">${club.all.goals.for}</td>
+            <td data-cell="Goals Against" class="fade-transition">${club.all.goals.against}</td>
+            <td data-cell="Goal Difference" class="fade-transition">${club.goalsDiff}</td>
+            <td data-cell="Points" class="fade-transition">${club.points}</td>
+            </tr>`;
+  });
+
+  return html;
 }
 
 export default class LeagueDetails {
@@ -167,23 +189,40 @@ export default class LeagueDetails {
       const data = await response.json();
       const elements = data.response;
       const todayDate = new Date();
-      const currentLeagues = elements.filter((league) =>
-        league.seasons.some(
-          (season) =>
-            new Date(season.end).getTime() >= todayDate.getTime() &&
-            new Date(season.start) <= todayDate.getTime(),
-        ),
+      const currentLeagues = elements.filter(
+        (league) =>
+          league.league.type == 'League' &&
+          league.seasons.some(
+            (season) =>
+              new Date(season.end).getTime() >= todayDate.getTime() &&
+              new Date(season.start) <= todayDate.getTime(),
+          ),
       );
-
       return currentLeagues;
     } catch (err) {
       console.log(err);
     }
   }
 
-  async initLeagueInfo(leagueId, seasonYear) {
-    const leagueInfo = await this.getLeagueInfo(leagueId, seasonYear);
-    this.renderLeagueInfo(leagueInfo.leagueInfo);
+  async initLeagueInfo(leagueId, seasonYear, gamesLeague) {
+    const leagueDetails = await this.getLeagueInfo(leagueId, seasonYear);
+    const parentElement = document.querySelector('.league-info');
+    if (leagueDetails.length > 0) {
+      leagueTitle(leagueDetails, parentElement);
+      this.renderLeagueInfo(leagueDetails);
+      const leagueGames = await gamesLeague.renderLeagueFixtures(
+        leagueId,
+        seasonYear,
+      );
+      const currentGames = document.querySelector('#leagueGamesLive');
+      const leagueCurrentGames = await gamesLeague.renderLeagueCurrentFixtures(
+        leagueId,
+        seasonYear,
+        currentGames,
+      );
+    } else {
+      parentElement.innerHTML = `<h2>Sorry we don't have any information about this league</h2>`;
+    }
   }
 
   async getLeagueInfo(leagueId, seasonYear) {
@@ -192,17 +231,8 @@ export default class LeagueDetails {
         `${BASE_URL}standings?league=${leagueId}&season=${seasonYear}`,
         requestOptions,
       );
-      const responseGames = await fetch(
-        `${BASE_URL}fixtures?league=${leagueId}&season=${seasonYear}&next=10`,
-        requestOptions,
-      );
       const dataLeague = await responseLeague.json();
-      const dataLeagueGames = await responseGames.json();
-      console.log(dataLeagueGames.response);
-      return {
-        leagueInfo: dataLeague.response,
-        leagueGames: dataLeagueGames.response,
-      };
+      return dataLeague.response;
     } catch (err) {
       console.log(err);
     }
