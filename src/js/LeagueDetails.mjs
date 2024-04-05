@@ -222,6 +222,7 @@ export default class LeagueDetails {
       );
     } else {
       parentElement.innerHTML = `<h2>Sorry we don't have any information about this league</h2>`;
+      parentElement.nextElementSibling.remove();
     }
   }
 
