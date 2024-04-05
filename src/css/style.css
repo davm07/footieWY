@@ -383,6 +383,13 @@ header {
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
+  overflow: overlay;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.containerName::-webkit-scrollbar {
+  display: none;
 }
 
 .tableImg {
