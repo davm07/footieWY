@@ -283,10 +283,12 @@ header {
   width: 70%;
   max-width: 100px;
   margin: auto;
+  max-height: 100px;
 }
 
 .match-status {
   flex: none;
+  max-width: 8ch;
 }
 
 .match-status p {
@@ -474,18 +476,21 @@ td::before {
   padding: 0.2rem 0.5rem;
 }
 
-.labelInput {
+.labelInput,
+.labelSelect {
   margin-bottom: 1rem;
   display: block;
 }
 
-.inputLeagues {
+.inputLeagues,
+#sortSelect {
   border: none;
   padding: 0.3rem;
   border-radius: var(--border-radius);
 }
 
-.inputLeagues:focus {
+.inputLeagues:focus,
+#sortSelect:focus {
   outline: none;
 }
 
@@ -600,6 +605,16 @@ td::before {
   exit 100% {
     opacity: 0;
   }
+}
+
+/* ------------ Team Details Page styles ------------ */
+.team-gamesSec {
+  background-color: var(--tertiary-color);
+  color: var(--dark-grey);
+}
+
+#sortSelect {
+  border: 1px solid var(--primary-color);
 }
 
 @media screen and (min-width: 600px) {

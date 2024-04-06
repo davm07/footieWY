@@ -59,7 +59,7 @@ function matchCardLeagueTemplate(element) {
               </div>
               <div class="match-status">
                 <p>VS</p>
-                <p>${element.fixture.status.elapsed !== null ? element.fixture.status.elapsed : element.fixture.status.long}</p>
+                <p>${element.fixture.status.elapsed !== null ? element.fixture.status.elapsed + '&#39;' : element.fixture.status.long}</p>
               </div>
               <div class="teamAway" data-id="${element.teams.away.id}">
                 <div class="teamLogo">
@@ -132,6 +132,19 @@ export default class MatchDetails {
       } else {
         this.parentElement.innerHTML = `<p>There are no matches available</p>`;
       }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async getTeamFixtures(leagueId, season, teamId) {
+    try {
+      const responseGames = await fetch(
+        `${BASE_URL}fixtures?league=${leagueId}&season=${season}&team=${teamId}`,
+        requestOptions,
+      );
+      const dataTeamGames = await responseGames.json();
+      return dataTeamGames.response;
     } catch (err) {
       console.log(err);
     }
