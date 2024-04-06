@@ -157,4 +157,8 @@ export default class MatchDetails {
   renderLeagueGamesData(list) {
     renderListWithTemplate(matchCardLeagueTemplate, this.parentElement, list);
   }
+
+  renderDataCurrentMatch(list, sectionElement) {
+    renderListWithTemplate(matchCardLeagueTemplate, sectionElement, list);
+  }
 }

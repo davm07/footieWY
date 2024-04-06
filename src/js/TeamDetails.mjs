@@ -14,7 +14,16 @@ const requestOptions = {
   redirect: 'follow',
 };
 
-function sortGames(selectElement) {}
+function filterCurrentGame(list) {
+  const todayDate = new Date();
+  const todayGames = list.filter(
+    (element) =>
+      new Date(element.fixture.date).toDateString() ===
+        todayDate.toDateString() && element.fixture.status.short !== 'FT',
+  );
+  console.log(todayGames);
+  return todayGames;
+}
 
 export default class TeamDetails {
   constructor(parentElement, matchDataSource, leagueId, season, teamId) {
@@ -73,6 +82,16 @@ export default class TeamDetails {
       (a, b) => new Date(b.fixture.date) - new Date(a.fixture.date),
     );
     this.matchDataSource.renderLeagueGamesData(this.teamGames);
+    const todayGameElement = document.querySelector('#today-gamesCont');
+    const todayGame = filterCurrentGame(this.teamGames);
+    if (todayGame.length > 0) {
+      this.matchDataSource.renderDataCurrentMatch(todayGame, todayGameElement);
+    } else {
+      const message = document.createElement('p');
+      message.setAttribute('class', 'message-game');
+      message.innerText = 'Sorry, there is no live game';
+      todayGameElement.replaceWith(message);
+    }
 
     const selectElement = document.querySelector('#sortSelect');
     selectElement.addEventListener('change', () => {

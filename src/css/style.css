@@ -613,6 +613,15 @@ td::before {
   color: var(--dark-grey);
 }
 
+.todayGame-title {
+  margin-bottom: 0.5rem;
+}
+
+.message-game {
+  margin-top: 0;
+  font-weight: 600;
+}
+
 #sortSelect {
   border: 1px solid var(--primary-color);
 }
