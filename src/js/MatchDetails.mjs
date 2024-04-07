@@ -23,7 +23,7 @@ function matchCardTemplate(element) {
             <div class="matchInfo">
               <div class="teamHome" data-id="${element.teams.home.id}">
                 <div class="teamLogo">
-                  <img src="https://test-api-sports-davm.b-cdn.net/football/teams/${element.teams.home.id}.png" alt="${element.teams.home.name}" loading="lazy">
+                  <img src="https://test-api-sports-davm.b-cdn.net/football/teams/${element.teams.home.id}.png" alt="${element.teams.home.name}" loading="lazy" onerror="this.src='/images/onerror.png';">
                 </div>
                 <h4 class="teamTitle">${element.teams.home.name}</h4>
                 <p>${element.goals.home}</p>
@@ -34,7 +34,7 @@ function matchCardTemplate(element) {
               </div>
               <div class="teamAway" data-id="${element.teams.away.id}">
                 <div class="teamLogo">
-                  <img src="https://test-api-sports-davm.b-cdn.net/football/teams/${element.teams.away.id}.png" alt="${element.teams.away.name}">
+                  <img src="https://test-api-sports-davm.b-cdn.net/football/teams/${element.teams.away.id}.png" alt="${element.teams.away.name}" loading="lazy" onerror="this.src='/images/onerror.png';">
                 </div>
                 <h4 class="teamTitle">${element.teams.away.name}</h4>
                 <p>${element.goals.away}</p>
@@ -52,7 +52,7 @@ function matchCardLeagueTemplate(element) {
             <div class="matchInfo">
               <div class="teamHome" data-id="${element.teams.home.id}">
                 <div class="teamLogo">
-                  <img src="https://test-api-sports-davm.b-cdn.net/football/teams/${element.teams.home.id}.png" alt="${element.teams.home.name}" loading="lazy">
+                  <img src="https://test-api-sports-davm.b-cdn.net/football/teams/${element.teams.home.id}.png" alt="${element.teams.home.name}" loading="lazy" onerror="this.src='/images/onerror.png';">
                 </div>
                 <h4 class="teamTitle">${element.teams.home.name}</h4>
                 <p>${element.goals.home !== null ? element.goals.home : 0}</p>
@@ -63,7 +63,7 @@ function matchCardLeagueTemplate(element) {
               </div>
               <div class="teamAway" data-id="${element.teams.away.id}">
                 <div class="teamLogo">
-                  <img src="https://test-api-sports-davm.b-cdn.net/football/teams/${element.teams.away.id}.png" alt="${element.teams.away.name}">
+                  <img src="https://test-api-sports-davm.b-cdn.net/football/teams/${element.teams.away.id}.png" alt="${element.teams.away.name}" loading="lazy" onerror="this.src='/images/onerror.png';">
                 </div>
                 <h4 class="teamTitle">${element.teams.away.name}</h4>
                 <p>${element.goals.away !== null ? element.goals.away : 0}</p>

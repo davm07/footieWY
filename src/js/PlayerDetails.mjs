@@ -17,7 +17,7 @@ import { renderListWithTemplate } from './utils.mjs';
 function playerCardTemplate(player) {
   return `<div class="player-card" data-id="${player.id}">
               <div class="player-img">
-                <img src="https://test-api-sports-davm.b-cdn.net/football/players/${player.id}.png" alt="${player.name}" loading="lazy" width="150" height="150">
+                <img src="https://test-api-sports-davm.b-cdn.net/football/players/${player.id}.png" alt="${player.name}" loading="lazy" width="150" height="150" onerror="this.src='/images/onerror.png';">
                 <div class="player-info">
                   <p class="playerNameNum">${player.name} - #${player.number}</p>
                   <p class="player-position">${player.position} &#8599</p>

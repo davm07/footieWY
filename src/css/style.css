@@ -616,6 +616,7 @@ td::before {
 .team-title {
   display: flex;
   align-items: center;
+  gap: 0.5rem;
 }
 
 .team-title img {

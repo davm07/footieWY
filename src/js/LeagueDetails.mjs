@@ -24,7 +24,7 @@ let state = {
 function leagueCardTemplate(element) {
   return `<div class="league-container" data-id="${element.league.id}">
 
-              <img src="https://test-api-sports-davm.b-cdn.net/football/leagues/${element.league.id}.png" alt="${element.league.name} - ${element.country.name}" loading="lazy">
+              <img src="https://test-api-sports-davm.b-cdn.net/football/leagues/${element.league.id}.png" alt="${element.league.name} - ${element.country.name}" loading="lazy" loading="lazy" onerror="this.src='/images/onerror.png';">
 
             <a href="/leagues/league-detail.html?leagueId=${element.league.id}&season=${element.seasons.at(-1).year}" class="league-link"><h3 class="leagueTitle">${element.league.name} <span class="leagueCountry">${element.country.name}</span>&#8599</h3></a>
           </div>`;
@@ -34,7 +34,7 @@ function leagueTableElements(element) {
   return `<tr>
             <td data-cell="Country" class="fade-transition">${element.country.name}</td>
             <td data-cell="Name" class="fade-transition">
-            <div class="containerName"><img src="https://test-api-sports-davm.b-cdn.net/football/leagues/${element.league.id}.png" alt="${element.league.name} - ${element.country.name}" loading="lazy" class="tableImg"><span>${element.league.name}</span></div></td>
+            <div class="containerName"><img src="https://test-api-sports-davm.b-cdn.net/football/leagues/${element.league.id}.png" alt="${element.league.name} - ${element.country.name}" loading="lazy" class="tableImg" onerror="this.src='/images/onerror.png';"><span>${element.league.name}</span></div></td>
             <td data-cell="Season" class="fade-transition">${element.seasons.at(-1).year}</td>
             <td data-cell="Season start" class="fade-transition">${element.seasons.at(-1).start}</td>
             <td data-cell="Season end" class="fade-transition">${element.seasons.at(-1).end}</td>
@@ -109,7 +109,7 @@ function searchLeagues(value, leaguesList) {
 }
 
 function leagueTitle(list, parentElement) {
-  const leagueTitleH2 = `<h2><div class="imgLeagueInfo"><img src="https://test-api-sports-davm.b-cdn.net/football/leagues/${list[0].league.id}.png" alt="${list[0].league.name} - ${list[0].league.country}" loading="lazy"></div>${list[0].league.name} - ${list[0].league.country}</h2>`;
+  const leagueTitleH2 = `<h2><div class="imgLeagueInfo"><img src="https://test-api-sports-davm.b-cdn.net/football/leagues/${list[0].league.id}.png" alt="${list[0].league.name} - ${list[0].league.country}" loading="lazy" onerror="this.src='/images/onerror.png';"></div>${list[0].league.name} - ${list[0].league.country}</h2>`;
   parentElement.insertAdjacentHTML('afterbegin', leagueTitleH2);
 }
 
@@ -119,7 +119,7 @@ function leagueInfoTable(element) {
   standings.forEach((club) => {
     html += `<tr data-id="${club.team.id}">
             <td data-cell="Position" class="fade-transition">${club.rank}</td>
-            <td data-cell="Club" class="fade-transition"><div class="containerName"><img src="https://test-api-sports-davm.b-cdn.net/football/teams/${club.team.id}.png" alt="${club.team.name}" loading="lazy" class="tableImg"><span>${club.team.name}</span></div><a href="/team/index.html?leagueId=${element.league.id}&season=${element.league.season}&teamId=${club.team.id}&position=${club.rank}">Show Club Page &#8599</a></td>
+            <td data-cell="Club" class="fade-transition"><div class="containerName"><img src="https://test-api-sports-davm.b-cdn.net/football/teams/${club.team.id}.png" alt="${club.team.name}" loading="lazy" class="tableImg" onerror="this.src='/images/onerror.png';"><span>${club.team.name}</span></div><a href="/team/index.html?leagueId=${element.league.id}&season=${element.league.season}&teamId=${club.team.id}&position=${club.rank}">Show Club Page &#8599</a></td>
             <td data-cell="Played" class="fade-transition">${club.all.played}</td>
             <td data-cell="Won" class="fade-transition">${club.all.win}</td>
             <td data-cell="Drawn" class="fade-transition">${club.all.draw}</td>
@@ -160,7 +160,6 @@ export default class LeagueDetails {
 
   async renderTopLeagues() {
     const leaguesData = await this.getTopCompetitions();
-    console.log(leaguesData);
     if (leaguesData != null && leaguesData.length > 0) {
       this.renderDataTopLeagues(leaguesData);
     } else {

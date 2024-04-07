@@ -26,7 +26,7 @@ function filterCurrentGame(list) {
 
 function renderTeamTitle(object, htmlElement) {
   let childs = `<h2>${object.team.name}</h2>
-                <img src="https://test-api-sports-davm.b-cdn.net/football/teams/${object.team.id}.png" alt="${object.team.name}" loading="lazy">`;
+                <img src="https://test-api-sports-davm.b-cdn.net/football/teams/${object.team.id}.png" alt="${object.team.name}" loading="lazy" onerror="this.src='/images/onerror.png';">`;
   htmlElement.insertAdjacentHTML('afterbegin', childs);
 }
 
