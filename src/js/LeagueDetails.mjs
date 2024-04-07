@@ -119,7 +119,7 @@ function leagueInfoTable(element) {
   standings.forEach((club) => {
     html += `<tr data-id="${club.team.id}">
             <td data-cell="Position" class="fade-transition">${club.rank}</td>
-            <td data-cell="Club" class="fade-transition"><div class="containerName"><img src="https://test-api-sports-davm.b-cdn.net/football/teams/${club.team.id}.png" alt="${club.team.name}" loading="lazy" class="tableImg"><span>${club.team.name}</span></div><a href="/team/index.html?leagueId=${element.league.id}&season=${element.league.season}&teamId=${club.team.id}">Show Club Page &#8599</a></td>
+            <td data-cell="Club" class="fade-transition"><div class="containerName"><img src="https://test-api-sports-davm.b-cdn.net/football/teams/${club.team.id}.png" alt="${club.team.name}" loading="lazy" class="tableImg"><span>${club.team.name}</span></div><a href="/team/index.html?leagueId=${element.league.id}&season=${element.league.season}&teamId=${club.team.id}&position=${club.rank}">Show Club Page &#8599</a></td>
             <td data-cell="Played" class="fade-transition">${club.all.played}</td>
             <td data-cell="Won" class="fade-transition">${club.all.win}</td>
             <td data-cell="Drawn" class="fade-transition">${club.all.draw}</td>
@@ -130,7 +130,6 @@ function leagueInfoTable(element) {
             <td data-cell="Points" class="fade-transition">${club.points}</td>
             </tr>`;
   });
-
   return html;
 }
 
