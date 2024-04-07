@@ -1,4 +1,4 @@
-import { renderListWithTemplate, renderWithTemplate } from './utils.mjs';
+import { addMyFavorite, checkExistingItem } from './utils.mjs';
 
 const BASE_URL = import.meta.env.VITE_SERVER_URL;
 const API_KEY = import.meta.env.VITE_API_KEY;
@@ -94,6 +94,29 @@ function filterByPosition(element, list) {
   return myNewList;
 }
 
+function teamDataObject(teamData, position, season) {
+  const teamId = teamData.team.id;
+  const teamName = teamData.team.name;
+  const teamLogo = `https://test-api-sports-davm.b-cdn.net/football/teams/${teamId}.png`;
+  const teamLeagueId = teamData.league.id;
+  const teamLeagueName = teamData.league.name;
+  const teamPositon = Number(position);
+  const teamSeason = Number(season);
+
+  const myObject = {
+    category: 'team',
+    id: teamId,
+    name: teamName,
+    logo: teamLogo,
+    league_id: teamLeagueId,
+    league_name: teamLeagueName,
+    team_position: teamPositon,
+    team_season: teamSeason,
+  };
+
+  return myObject;
+}
+
 export default class TeamDetails {
   constructor(
     parentElement,
@@ -117,7 +140,21 @@ export default class TeamDetails {
   }
 
   async initTeamInfo() {
+    const heart = document.querySelector('#heartFavorite');
+    const message = document.querySelector('#myFavMsg');
     await this.renderTeamStatistics();
+    checkExistingItem(
+      'teams',
+      teamDataObject(this.teamStatistics, this.position, this.season),
+      heart,
+      message,
+    );
+    addMyFavorite(
+      'teams',
+      teamDataObject(this.teamStatistics, this.position, this.season),
+      heart,
+      message,
+    );
     await this.renderTeamSquad();
     await this.renderTeamGames();
   }
@@ -181,14 +218,14 @@ export default class TeamDetails {
   async renderTeamSquad() {
     this.teamSquad = await this.getTeamSquad();
     if (this.teamSquad && this.teamSquad.length > 0) {
-      this.playerDataSource.renderPlayerCardData(this.teamSquad);
+      this.playerDataSource.renderPlayerCardData(this.teamSquad, this.season);
 
       const selectElement = document.querySelector('#sortSelectPos');
       selectElement.addEventListener('change', () => {
         const squadElement = document.querySelector('#teamSquad');
         let filteredSquad = filterByPosition(selectElement, this.teamSquad);
         squadElement.innerHTML = '';
-        this.playerDataSource.renderPlayerCardData(filteredSquad);
+        this.playerDataSource.renderPlayerCardData(filteredSquad, this.season);
       });
     } else {
       const sectionElement = document.querySelector('#squad-section');

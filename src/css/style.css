@@ -613,6 +613,11 @@ td::before {
 }
 
 /* ------------ Team Details Page styles ------------ */
+.top-container {
+  display: grid;
+  grid-template-columns: 1fr 0.3fr;
+}
+
 .team-title {
   display: flex;
   align-items: center;
@@ -627,17 +632,67 @@ td::before {
   margin: 0;
 }
 
+.heart-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.heart {
+  margin: 0 auto;
+  height: 50px;
+  width: 50px;
+}
+
+.heart-filled {
+  fill: var(--secondary-color);
+  animation: crescendo 300ms ease-in forwards;
+}
+
+.heart-unfilled {
+  animation: decrescendo 300ms ease-out forwards;
+}
+
+@keyframes crescendo {
+  0% {
+    fill: var(--secondary-color);
+    transform: scale(0);
+  }
+  50% {
+    fill: var(--secondary-color);
+    transform: scale(1.1);
+  }
+  100% {
+    fill: var(--secondary-color);
+    transform: scale(1);
+  }
+}
+
+@keyframes decrescendo {
+  0% {
+    transform: scale(1.1);
+  }
+  50% {
+    fill: none;
+    transform: scale(0);
+  }
+  100% {
+    fill: none;
+    transform: scale(1);
+  }
+}
+
+#myFavMsg {
+  text-align: center;
+  font-size: 0.75rem;
+}
+
 #teamStatistics {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
   row-gap: 1rem;
 }
-
-/* #teamStatistics .statistic-container:nth-child(even) {
-  background-color: var(--dark-grey);
-  color: var(--tertiary-color);
-} */
 
 .statistic-container {
   text-align: center;
@@ -710,6 +765,11 @@ td::before {
   background: linear-gradient(to top, var(--primary-color), transparent);
   border-end-start-radius: 0.45rem;
   border-end-end-radius: 0.45rem;
+}
+
+.player-link {
+  text-decoration: none;
+  color: var(--tertiary-color);
 }
 
 .playerNameNum,
