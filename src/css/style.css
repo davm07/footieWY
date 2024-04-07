@@ -323,6 +323,10 @@ header {
   max-height: 100px;
 }
 
+.league-link .leagueTitle {
+  text-decoration: underline;
+}
+
 .leagueTitle {
   color: var(--primary-color);
   font-size: medium;

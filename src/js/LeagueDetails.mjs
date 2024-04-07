@@ -26,7 +26,7 @@ function leagueCardTemplate(element) {
 
               <img src="https://test-api-sports-davm.b-cdn.net/football/leagues/${element.league.id}.png" alt="${element.league.name} - ${element.country.name}" loading="lazy">
 
-            <h3 class="leagueTitle">${element.league.name} <span class="leagueCountry">${element.country.name}</span></h3>
+            <a href="/leagues/league-detail.html?leagueId=${element.league.id}&season=${element.seasons.at(-1).year}" class="league-link"><h3 class="leagueTitle">${element.league.name} <span class="leagueCountry">${element.country.name}</span>&#8599</h3></a>
           </div>`;
 }
 
@@ -160,6 +160,7 @@ export default class LeagueDetails {
 
   async renderTopLeagues() {
     const leaguesData = await this.getTopCompetitions();
+    console.log(leaguesData);
     if (leaguesData != null && leaguesData.length > 0) {
       this.renderDataTopLeagues(leaguesData);
     } else {
@@ -168,7 +169,7 @@ export default class LeagueDetails {
   }
 
   async getTopCompetitions() {
-    let leagues_ids = [2, 3, 39, 140, 78, 61, 135];
+    let leagues_ids = [39, 140, 78, 61, 135];
     try {
       const response = await fetch(`${BASE_URL}leagues`, requestOptions);
       const data = await response.json();
