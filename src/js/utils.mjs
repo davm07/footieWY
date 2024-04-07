@@ -7,6 +7,14 @@ function convertToText(res) {
   }
 }
 
+export function getLocalStorage(key) {
+  return JSON.parse(localStorage.getItem(key));
+}
+// save data to local storage
+export function setLocalStorage(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
 // render the content
 export function renderWithTemplate(template, parent, data, callback) {
   const content = template.content.cloneNode(true);

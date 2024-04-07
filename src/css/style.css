@@ -26,7 +26,7 @@ body {
   font-size: var(--font-base);
   background-color: var(--primary-color);
   color: var(--tertiary-color);
-  min-width: 320px;
+  min-width: 350px;
   animation: myEntrance 800ms ease-in;
 }
 
@@ -483,19 +483,20 @@ td::before {
 }
 
 .inputLeagues,
-#sortSelect {
+.selectElement {
   border: none;
   padding: 0.3rem;
   border-radius: var(--border-radius);
 }
 
 .inputLeagues:focus,
-#sortSelect:focus {
+.selectElement:focus {
   outline: none;
 }
 
 /* ------------ Leagues Table Page styles ------------ */
-.league-info.divider {
+.league-info.divider,
+.team-info.divider {
   animation: none;
   animation-timeline: none;
   animation-range: none;
@@ -608,6 +609,50 @@ td::before {
 }
 
 /* ------------ Team Details Page styles ------------ */
+.team-title {
+  display: flex;
+  align-items: center;
+}
+
+.team-title img {
+  height: 60px;
+}
+
+.team-title h2 {
+  margin: 0;
+}
+
+#teamStatistics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  row-gap: 1rem;
+}
+
+/* #teamStatistics .statistic-container:nth-child(even) {
+  background-color: var(--dark-grey);
+  color: var(--tertiary-color);
+} */
+
+.statistic-container {
+  text-align: center;
+  font-family: var(--font-headline);
+  background-color: var(--secondary-color);
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  color: var(--dark-grey);
+  width: 80px;
+}
+
+.statistic-container p {
+  margin: 0.5rem;
+}
+
+.statistic + p {
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+
 .team-gamesSec {
   background-color: var(--tertiary-color);
   color: var(--dark-grey);
@@ -617,13 +662,73 @@ td::before {
   margin-bottom: 0.5rem;
 }
 
+.team-squad h3 {
+  margin-top: 0;
+}
+
+#teamSquad {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-gap: 1rem;
+  height: 70vh;
+  overflow-y: scroll;
+  padding: 0 0.3rem;
+}
+
+#teamSquad::-webkit-scrollbar {
+  width: 6px;
+}
+
+#teamSquad::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+}
+
+.player-img {
+  position: relative;
+}
+
+.player-img img {
+  border-radius: var(--border-radius);
+  width: 100%;
+  height: auto;
+}
+
+.player-info {
+  margin: 0.3rem 0;
+  padding: 0 0.2rem;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(to top, var(--primary-color), transparent);
+  border-end-start-radius: 0.45rem;
+  border-end-end-radius: 0.45rem;
+}
+
+.playerNameNum,
+.player-position {
+  margin: 0;
+  text-shadow:
+    -0.6px -0.6px 0 var(--primary-color),
+    0.6px -0.6px 0 var(--primary-color),
+    -0.6px 0.6px 0 var(--primary-color),
+    0.6px 0.6px 0 var(--primary-color);
+}
+
 .message-game {
   margin-top: 0;
   font-weight: 600;
 }
 
-#sortSelect {
+.selectElement {
   border: 1px solid var(--primary-color);
+}
+
+/* message styles in case there is no team info */
+.sorry-msg {
+  margin: 1rem;
 }
 
 @media screen and (min-width: 600px) {

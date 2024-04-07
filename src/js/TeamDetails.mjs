@@ -1,4 +1,4 @@
-import { renderListWithTemplate } from './utils.mjs';
+import { renderListWithTemplate, renderWithTemplate } from './utils.mjs';
 
 const BASE_URL = import.meta.env.VITE_SERVER_URL;
 const API_KEY = import.meta.env.VITE_API_KEY;
@@ -21,18 +21,105 @@ function filterCurrentGame(list) {
       new Date(element.fixture.date).toDateString() ===
         todayDate.toDateString() && element.fixture.status.short !== 'FT',
   );
-  console.log(todayGames);
   return todayGames;
 }
 
+function renderTeamTitle(object, htmlElement) {
+  let childs = `<h2>${object.team.name}</h2>
+                <img src="https://test-api-sports-davm.b-cdn.net/football/teams/${object.team.id}.png" alt="${object.team.name}" loading="lazy">`;
+  htmlElement.insertAdjacentHTML('afterbegin', childs);
+}
+
+function teamStatisticsTemplate(object, teamPosition, htmlElement) {
+  let html = `<div class="statistic-container">
+                <p class="statistic">Position</p>
+                <p>${teamPosition}</p>
+              </div>
+              <div class="statistic-container">
+                <p class="statistic">Played</p>
+                <p>${object.fixtures.played.total}</p>
+              </div>
+              <div class="statistic-container">
+                <p class="statistic">Won</p>
+                <p>${object.fixtures.wins.total}</p>
+              </div>
+              <div class="statistic-container">
+                <p class="statistic">Drawn</p>
+                <p>${object.fixtures.draws.total}</p>
+              </div>
+              <div class="statistic-container">
+                <p class="statistic">Lost</p>
+                <p>${object.fixtures.loses.total}</p>
+              </div>
+              <div class="statistic-container">
+                <p class="statistic" title="Goals For">GF</p>
+                <p>${object.goals.for.total.total}</p>
+              </div>
+              <div class="statistic-container">
+                <p class="statistic" title="Goals Against">GA</p>
+                <p>${object.goals.against.total.total}</p>
+              </div>
+              <div class="statistic-container">
+                <p class="statistic" title="Goal Difference">GD</p>
+                <p>${Number(object.goals.for.total.total) - Number(object.goals.against.total.total)}</p>
+              </div>
+              <div class="statistic-container">
+                <p class="statistic">Points</p>
+                <p>${Number(object.fixtures.wins.total) * 3 + Number(object.fixtures.draws.total) * 1 + Number(object.fixtures.loses.total) * 0}</p>
+              </div>`;
+
+  htmlElement.insertAdjacentHTML('afterbegin', html);
+}
+
+function filterByPosition(element, list) {
+  let value = element.value;
+  let myNewList = list;
+  switch (value) {
+    case 'Goalkeeper':
+      myNewList = list.filter((player) => player.position === 'Goalkeeper');
+      break;
+    case 'Defender':
+      myNewList = list.filter((player) => player.position === 'Defender');
+      break;
+    case 'Midfielder':
+      myNewList = list.filter((player) => player.position === 'Midfielder');
+      break;
+    case 'Attacker':
+      myNewList = list.filter((player) => player.position === 'Attacker');
+      break;
+    default:
+      myNewList = list;
+      break;
+  }
+  return myNewList;
+}
+
 export default class TeamDetails {
-  constructor(parentElement, matchDataSource, leagueId, season, teamId) {
+  constructor(
+    parentElement,
+    matchDataSource,
+    leagueId,
+    season,
+    teamId,
+    position,
+    playerDataSource,
+  ) {
     this.parentElement = parentElement;
     this.matchDataSource = matchDataSource;
-    this.teamGames = null;
     this.leagueId = leagueId;
     this.season = season;
     this.teamId = teamId;
+    this.position = position;
+    this.playerDataSource = playerDataSource;
+    this.teamGames = null;
+    this.teamSquad = null;
+    this.teamStatistics = null;
+  }
+
+  async initTeamInfo() {
+    await this.renderTeamStatistics();
+    await this.renderTeamSquad();
+    await this.renderTeamGames();
   }
 
   async getTeamStatistics() {
@@ -42,7 +129,6 @@ export default class TeamDetails {
         requestOptions,
       );
       const data = await response.json();
-      console.log(data.response);
       return data.response;
     } catch (err) {
       console.log(err);
@@ -56,8 +142,8 @@ export default class TeamDetails {
         requestOptions,
       );
       const data = await response.json();
-      console.log(data.response);
-      return data.response;
+      const teamSquad = data.response[0].players;
+      return teamSquad;
     } catch (err) {
       console.log(err);
     }
@@ -76,42 +162,84 @@ export default class TeamDetails {
     }
   }
 
+  async renderTeamStatistics() {
+    this.teamStatistics = await this.getTeamStatistics();
+    if (this.teamStatistics) {
+      const titleElement = document.querySelector('#team-title');
+      renderTeamTitle(this.teamStatistics, titleElement);
+      teamStatisticsTemplate(
+        this.teamStatistics,
+        this.position,
+        this.parentElement,
+      );
+    } else {
+      const mainElement = document.querySelector('#team-main');
+      mainElement.innerHTML = `<h2 class="sorry-msg">Sorry, we don't have information for this team</h2>`;
+    }
+  }
+
+  async renderTeamSquad() {
+    this.teamSquad = await this.getTeamSquad();
+    if (this.teamSquad && this.teamSquad.length > 0) {
+      this.playerDataSource.renderPlayerCardData(this.teamSquad);
+
+      const selectElement = document.querySelector('#sortSelectPos');
+      selectElement.addEventListener('change', () => {
+        const squadElement = document.querySelector('#teamSquad');
+        let filteredSquad = filterByPosition(selectElement, this.teamSquad);
+        squadElement.innerHTML = '';
+        this.playerDataSource.renderPlayerCardData(filteredSquad);
+      });
+    } else {
+      const sectionElement = document.querySelector('#squad-section');
+      sectionElement.innerHTML = `<h2 class="sorry-msg">Sorry, we don't have this team squad</h2>`;
+    }
+  }
+
   async renderTeamGames() {
     this.teamGames = await this.getTeamGames();
-    this.teamGames = this.teamGames.sort(
-      (a, b) => new Date(b.fixture.date) - new Date(a.fixture.date),
-    );
-    this.matchDataSource.renderLeagueGamesData(this.teamGames);
-    const todayGameElement = document.querySelector('#today-gamesCont');
-    const todayGame = filterCurrentGame(this.teamGames);
-    if (todayGame.length > 0) {
-      this.matchDataSource.renderDataCurrentMatch(todayGame, todayGameElement);
-    } else {
-      const message = document.createElement('p');
-      message.setAttribute('class', 'message-game');
-      message.innerText = 'Sorry, there is no live game';
-      todayGameElement.replaceWith(message);
-    }
-
-    const selectElement = document.querySelector('#sortSelect');
-    selectElement.addEventListener('change', () => {
-      let value = selectElement.value;
-      if (value === 'newest') {
-        this.teamGames = this.teamGames.sort(
-          (a, b) => new Date(b.fixture.date) - new Date(a.fixture.date),
+    if (this.teamGames && this.teamGames.length > 0) {
+      this.teamGames = this.teamGames.sort(
+        (a, b) => new Date(b.fixture.date) - new Date(a.fixture.date),
+      );
+      this.matchDataSource.renderLeagueGamesData(this.teamGames);
+      const todayGameElement = document.querySelector('#today-gamesCont');
+      const todayGame = filterCurrentGame(this.teamGames);
+      if (todayGame.length > 0) {
+        this.matchDataSource.renderDataCurrentMatch(
+          todayGame,
+          todayGameElement,
         );
       } else {
-        this.teamGames = this.teamGames.sort(
-          (a, b) => new Date(a.fixture.date) - new Date(b.fixture.date),
-        );
+        const message = document.createElement('p');
+        message.setAttribute('class', 'message-game');
+        message.innerText = 'Sorry, there is no live game';
+        todayGameElement.replaceWith(message);
       }
-      const containerGames = document.querySelector('#team-gamesCont');
-      containerGames.innerHTML = '';
-      this.matchDataSource.renderLeagueGamesData(this.teamGames);
-      const firsElement = containerGames.firstElementChild;
-      if (firsElement) {
-        firsElement.scrollIntoView();
-      }
-    });
+
+      const selectElement = document.querySelector('#sortSelect');
+      selectElement.addEventListener('change', () => {
+        let value = selectElement.value;
+        if (value === 'newest') {
+          this.teamGames = this.teamGames.sort(
+            (a, b) => new Date(b.fixture.date) - new Date(a.fixture.date),
+          );
+        } else {
+          this.teamGames = this.teamGames.sort(
+            (a, b) => new Date(a.fixture.date) - new Date(b.fixture.date),
+          );
+        }
+        const containerGames = document.querySelector('#team-gamesCont');
+        containerGames.innerHTML = '';
+        this.matchDataSource.renderLeagueGamesData(this.teamGames);
+        const firsElement = containerGames.firstElementChild;
+        if (firsElement) {
+          firsElement.scrollIntoView();
+        }
+      });
+    } else {
+      const sectionElement = document.querySelector('#games-section');
+      sectionElement.innerHTML = `<h2 class="sorry-msg">Sorry, there are no fixtures for this team</h2>`;
+    }
   }
 }

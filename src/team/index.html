@@ -23,22 +23,42 @@
     />
     <link rel="manifest" href="/images/favicon_io/site.webmanifest" />
     <title>Team Information</title>
-    <script type="module" src="../js/team-details.js"></script>
+    <script type="module" src="../js/team-details.js" defer></script>
   </head>
 
   <body>
     <header id="header"></header>
-    <main>
-      <section class="divider" id="team-details"></section>
-      <section class="team-gamesSec divider">
-        <h3>League Matches</h3>
-        <h4 class="todayGame-title">Today's Match</h4>
+    <main id="team-main">
+      <section class="team-statistics divider" id="statistics-section">
+        <div class="team-title" id="team-title">
+        </div>
+        <h3>Team Statistics</h3>
+        <div id="teamStatistics"></div>
+      </section>
+      <section class="team-info divider" id="squad-section">
+        <div class="team-squad">
+          <h3>Squad</h3>
+          <label for="sortSelectPos" class="labelSelect">Sort by Position:
+            <select id="sortSelectPos" class="selectElement">
+              <option value="All">All</option>
+              <option value="Goalkeeper">Goalkeeper</option>
+              <option value="Defender">Defender</option>
+              <option value="Midfielder">Midfielder</option>
+              <option value="Attacker">Attacker</option>
+            </select>
+          </label>
+          <div id="teamSquad"></div>
+        </div>
+      </section>
+      <section class="team-gamesSec divider" id="games-section">
+        <h3>League Fixtures</h3>
+        <h4 class="todayGame-title">Today's Fixture</h4>
         <div id="today-gamesCont" class="gamesContainer"></div>
         <label for="sortSelect" class="labelSelect"
-          >Sort Matches:
-          <select id="sortSelect">
-            <option value="newest">Newest Matches</option>
-            <option value="previous">Previous Matches</option>
+          >Sort Fixtures:
+          <select id="sortSelect" class="selectElement">
+            <option value="newest">Newest Fixtures</option>
+            <option value="previous">Previous Fixtures</option>
           </select>
         </label>
         <div id="team-gamesCont" class="gamesContainer"></div>
