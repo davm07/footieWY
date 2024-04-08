@@ -10,3 +10,6 @@ const gamesElement = document.querySelector('#leagueGames');
 const leagueInfo = new LeagueDetails(parentElement);
 const leagueGames = new MatchDetails(gamesElement);
 leagueInfo.initLeagueInfo(leagueId, seasonYear, leagueGames);
+document.querySelector('#return-league').addEventListener('click', () => {
+  window.history.back();
+});

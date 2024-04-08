@@ -502,8 +502,15 @@ td::before {
 .league-info.divider,
 .team-info.divider {
   animation: none;
-  animation-timeline: none;
-  animation-range: none;
+}
+
+#return-league {
+  margin: 0 0.8rem;
+  padding: 0.3rem 0.5rem;
+  color: var(--primary-color);
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--secondary-color);
 }
 
 .league-info h2 {

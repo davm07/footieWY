@@ -209,12 +209,9 @@ export default class LeagueDetails {
     if (leagueDetails.length > 0) {
       leagueTitle(leagueDetails, parentElement);
       this.renderLeagueInfo(leagueDetails);
-      const leagueGames = await gamesLeague.renderLeagueFixtures(
-        leagueId,
-        seasonYear,
-      );
+      await gamesLeague.renderLeagueFixtures(leagueId, seasonYear);
       const currentGames = document.querySelector('#leagueGamesLive');
-      const leagueCurrentGames = await gamesLeague.renderLeagueCurrentFixtures(
+      await gamesLeague.renderLeagueCurrentFixtures(
         leagueId,
         seasonYear,
         currentGames,
