@@ -93,18 +93,22 @@ function renderPlayerTitle(list, htmlElement) {
   htmlElement.insertAdjacentHTML('afterbegin', html);
 }
 
-function playerDataObject(playerData) {
+function playerDataObject(playerData, position) {
   const playerId = playerData[0].player.id;
   const playerName = playerData[0].player.name;
   const playerPhoto = `https://test-api-sports-davm.b-cdn.net/football/players/${playerId}.png`;
   const playerAge = playerData[0].player.age;
   const teamId = playerData[0].statistics[0].team.id;
   const teamName = playerData[0].statistics[0].team.name;
+  const teamPosition = position;
   const teamLogo = `https://test-api-sports-davm.b-cdn.net/football/teams/${teamId}.png`;
   const leagueId = playerData[0].statistics[0].league.id;
   const leagueName = playerData[0].statistics[0].league.name;
   const leagueLogo = `https://test-api-sports-davm.b-cdn.net/football/leagues/${leagueId}.png`;
   const playerSeason = playerData[0].statistics[0].league.season;
+  const teamLeaguePage = `/leagues/league-detail.html?leagueId=${leagueId}&season=${playerSeason}`;
+  const teamPage = `/team/index.html?leagueId=${leagueId}&season=${playerSeason}&teamId=${teamId}&position=${teamPosition}`;
+  const playerPage = `/player/index.html?playerId=${playerId}&leagueId=${leagueId}&season=${playerSeason}&teamPosition=${teamPosition}`;
 
   const myObject = {
     category: 'player',
@@ -115,10 +119,14 @@ function playerDataObject(playerData) {
     team_id: teamId,
     team_name: teamName,
     team_logo: teamLogo,
+    team_position: teamPosition,
     league_id: leagueId,
     league_name: leagueName,
     league_logo: leagueLogo,
     player_season: playerSeason,
+    team_url: teamPage,
+    league_url: teamLeaguePage,
+    player_url: playerPage,
   };
 
   return myObject;
@@ -149,11 +157,16 @@ export default class PlayerDetails {
 
     checkExistingItem(
       'players',
-      playerDataObject(this.playerData),
+      playerDataObject(this.playerData, this.teamPosition),
       heart,
       message,
     );
-    addMyFavorite('players', playerDataObject(this.playerData), heart, message);
+    addMyFavorite(
+      'players',
+      playerDataObject(this.playerData, this.teamPosition),
+      heart,
+      message,
+    );
     renderPlayerTitle(this.playerData, titleElement);
     this.renderPlayerProfileData(this.playerData, this.teamPosition);
   }

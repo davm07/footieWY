@@ -88,7 +88,7 @@ function addToLocalStorage(key, data) {
   setLocalStorage(key, elements);
 }
 
-function deleteFromLocalStorage(key, data) {
+export function deleteFromLocalStorage(key, data) {
   let elements = getLocalStorage(key) || [];
   let newElement = data;
   let existingElement = elements.find(

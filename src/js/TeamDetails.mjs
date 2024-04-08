@@ -25,7 +25,6 @@ function filterCurrentGame(list) {
 }
 
 function renderTeamTitle(object, htmlElement) {
-  console.log(object);
   let childs = `<div class="title-container">
                   <h2>${object.team.name}</h2>
                   <img src="https://test-api-sports-davm.b-cdn.net/football/teams/${object.team.id}.png" alt="${object.team.name}" loading="lazy" onerror="this.src='/images/onerror.png';">
@@ -108,8 +107,11 @@ function teamDataObject(teamData, position, season) {
   const teamLogo = `https://test-api-sports-davm.b-cdn.net/football/teams/${teamId}.png`;
   const teamLeagueId = teamData.league.id;
   const teamLeagueName = teamData.league.name;
-  const teamPositon = Number(position);
+  const teamLeagueLogo = `https://test-api-sports-davm.b-cdn.net/football/leagues/${teamLeagueId}.png`;
+  const teamPosition = Number(position);
   const teamSeason = Number(season);
+  const teamLeaguePage = `/leagues/league-detail.html?leagueId=${teamLeagueId}&season=${teamSeason}`;
+  const teamPage = `/team/index.html?leagueId=${teamLeagueId}&season=${teamSeason}&teamId=${teamId}&position=${teamPosition}`;
 
   const myObject = {
     category: 'team',
@@ -118,8 +120,11 @@ function teamDataObject(teamData, position, season) {
     logo: teamLogo,
     league_id: teamLeagueId,
     league_name: teamLeagueName,
-    team_position: teamPositon,
+    league_logo: teamLeagueLogo,
+    team_position: teamPosition,
     team_season: teamSeason,
+    team_url: teamPage,
+    league_url: teamLeaguePage,
   };
 
   return myObject;

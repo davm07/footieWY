@@ -217,6 +217,7 @@ header {
   text-decoration: none;
   font-family: var(--font-headline);
   margin: 1rem 0;
+  border-radius: var(--border-radius);
 }
 
 /* Latest matches section styles */
@@ -860,7 +861,7 @@ td::before {
   max-width: 100px;
   height: 100px;
   color: var(--dark-grey);
-  padding: 0.3rem;
+  padding: 0.25rem;
   font-family: var(--font-headline);
   display: grid;
   grid-template-rows: repeat(2, 1fr);
@@ -884,11 +885,12 @@ td::before {
   flex-direction: row-reverse;
   justify-content: center;
   align-items: center;
+  gap: 0.15rem;
 }
 
 .detail-league .detail-img,
 .detail-team .detail-img {
-  width: 30px;
+  width: 20px;
   height: fit-content;
   margin: 0;
 }
@@ -896,6 +898,103 @@ td::before {
 p.detail-info {
   margin: 0;
   font-size: 1rem;
+}
+
+/* ------------ My Favorite Page styles ------------ */
+.my-favorites.divider {
+  animation: none;
+}
+
+.my-favorites h2 {
+  margin-top: 0;
+}
+
+#my-teams,
+#my-players {
+  display: grid;
+  grid-auto-rows: auto;
+  row-gap: 1rem;
+}
+
+.card-favorite {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--secondary-color);
+  color: var(--dark-grey);
+  padding: 0.8rem;
+  border-radius: var(--border-radius);
+  height: 8rem;
+  max-width: 25rem;
+}
+
+.info-wraper {
+  display: flex;
+  flex-direction: column;
+}
+
+.team-wraper,
+.player-wraper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-favorite a {
+  color: var(--dark-grey);
+}
+
+.info-wraper h3,
+.info-wraper p {
+  margin: 0;
+}
+
+.info-wraper p {
+  font-size: var(--small-font);
+}
+
+.favorite-imgB {
+  height: 40px;
+  width: auto;
+}
+
+.favorite-imgS {
+  height: 20px;
+  width: auto;
+}
+
+.remove-wraper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.remove-btn {
+  border: none;
+  border-radius: var(--border-radius);
+  width: fit-content;
+  font-size: var(--large-font);
+  background-color: var(--dark-grey);
+  color: var(--tertiary-color);
+}
+
+.remove-wraper span {
+  font-size: var(--small-font);
+  font-weight: bold;
+}
+
+.player-wraper.team-league {
+  margin-top: 0.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.inside-wraper {
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  gap: 0.5rem;
 }
 
 @media screen and (min-width: 600px) {
