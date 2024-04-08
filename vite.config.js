@@ -12,6 +12,8 @@ export default defineConfig({
         leagues: resolve(__dirname, 'src/leagues/index.html'),
         leagueDetails: resolve(__dirname, 'src/leagues/league-detail.html'),
         team: resolve(__dirname, 'src/team/index.html'),
+        player: resolve(__dirname, 'src/player/index.html'),
+        favorites: resolve(__dirname, 'src/myFavorites/index.html'),
       },
     },
   },
