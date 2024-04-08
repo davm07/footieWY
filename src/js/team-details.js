@@ -14,7 +14,13 @@ const statisticsElement = document.querySelector('#teamStatistics');
 const gamesTeamElement = document.querySelector('#team-gamesCont');
 const playerGridElement = document.querySelector('#teamSquad');
 
-const playerDetails = new PlayerDetails(playerGridElement);
+const playerDetails = new PlayerDetails(
+  playerGridElement,
+  null,
+  null,
+  null,
+  position,
+);
 const gameDetails = new MatchDetails(gamesTeamElement);
 
 const teamDetails = new TeamDetails(

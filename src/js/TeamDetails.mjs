@@ -218,14 +218,24 @@ export default class TeamDetails {
   async renderTeamSquad() {
     this.teamSquad = await this.getTeamSquad();
     if (this.teamSquad && this.teamSquad.length > 0) {
-      this.playerDataSource.renderPlayerCardData(this.teamSquad, this.season);
+      this.playerDataSource.renderPlayerCardData(
+        this.teamSquad,
+        this.season,
+        this.leagueId,
+        this.position,
+      );
 
       const selectElement = document.querySelector('#sortSelectPos');
       selectElement.addEventListener('change', () => {
         const squadElement = document.querySelector('#teamSquad');
         let filteredSquad = filterByPosition(selectElement, this.teamSquad);
         squadElement.innerHTML = '';
-        this.playerDataSource.renderPlayerCardData(filteredSquad, this.season);
+        this.playerDataSource.renderPlayerCardData(
+          filteredSquad,
+          this.season,
+          this.leagueId,
+          this.position,
+        );
       });
     } else {
       const sectionElement = document.querySelector('#squad-section');
