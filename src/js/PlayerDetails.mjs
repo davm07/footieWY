@@ -1,8 +1,4 @@
-import {
-  renderListWithTemplate,
-  checkExistingItem,
-  addMyFavorite,
-} from './utils.mjs';
+import { checkExistingItem, addMyFavorite } from './utils.mjs';
 
 const BASE_URL = import.meta.env.VITE_SERVER_URL;
 const API_KEY = import.meta.env.VITE_API_KEY;
@@ -24,7 +20,7 @@ function playerCardTemplate(player, season, leagueId, teamPosition) {
                 <img src="https://test-api-sports-davm.b-cdn.net/football/players/${player.id}.png" alt="${player.name}" loading="lazy" width="150" height="150" onerror="this.src='/images/onerror.png';">
                 <div class="player-info">
                   <a href="/player/index.html?playerId=${player.id}&leagueId=${leagueId}&season=${season}&teamPosition=${teamPosition}" class="player-link">
-                    <p class="playerNameNum">${player.name} - #${player.number}</p>
+                    <p class="playerNameNum">${player.name} - #${player.number !== null ? player.number : 'NA'}</p>
                     <p class="player-position">${player.position} &#8599</p>
                   </a>
                 </div>
@@ -169,7 +165,6 @@ export default class PlayerDetails {
         requestOptions,
       );
       const data = await response.json();
-      console.log(data.response);
       return data.response;
     } catch (err) {
       console.log(err);

@@ -620,12 +620,27 @@ td::before {
 
 .team-title {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 0.5rem;
 }
 
+.title-container a {
+  color: var(--tertiary-color);
+}
+
 .team-title img {
   height: 60px;
+}
+
+.title-container.league p {
+  margin: 0;
 }
 
 .team-title h2 {
@@ -818,7 +833,7 @@ td::before {
   grid-auto-rows: auto;
 }
 
-#player-container img {
+#player-container > img {
   margin: 0 auto;
 }
 
@@ -834,10 +849,11 @@ td::before {
   text-align: center;
   background-color: var(--tertiary-color);
   border-radius: var(--border-radius);
-  width: 95px;
+  width: 100%;
+  max-width: 100px;
   height: 100px;
   color: var(--dark-grey);
-  padding: 0.5rem;
+  padding: 0.3rem;
   font-family: var(--font-headline);
   display: grid;
   grid-template-rows: repeat(2, 1fr);
@@ -859,6 +875,7 @@ td::before {
 .detail-team {
   display: flex;
   flex-direction: row-reverse;
+  justify-content: center;
   align-items: center;
 }
 

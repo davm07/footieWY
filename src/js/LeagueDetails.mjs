@@ -232,6 +232,7 @@ export default class LeagueDetails {
         requestOptions,
       );
       const dataLeague = await responseLeague.json();
+      console.log(dataLeague.response);
       return dataLeague.response;
     } catch (err) {
       console.log(err);

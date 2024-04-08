@@ -25,8 +25,16 @@ function filterCurrentGame(list) {
 }
 
 function renderTeamTitle(object, htmlElement) {
-  let childs = `<h2>${object.team.name}</h2>
-                <img src="https://test-api-sports-davm.b-cdn.net/football/teams/${object.team.id}.png" alt="${object.team.name}" loading="lazy" onerror="this.src='/images/onerror.png';">`;
+  console.log(object);
+  let childs = `<div class="title-container">
+                  <h2>${object.team.name}</h2>
+                  <img src="https://test-api-sports-davm.b-cdn.net/football/teams/${object.team.id}.png" alt="${object.team.name}" loading="lazy" onerror="this.src='/images/onerror.png';">
+                  </div>
+                <div class="title-container league">
+                  <a href="/leagues/league-detail.html?leagueId=${object.league.id}&season=${object.league.season}" title="Show ${object.league.name} page">
+                  <p>${object.league.name} &#8599</p>
+                  </a>
+                </div>`;
   htmlElement.insertAdjacentHTML('afterbegin', childs);
 }
 
