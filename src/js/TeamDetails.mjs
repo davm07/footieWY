@@ -130,6 +130,26 @@ function teamDataObject(teamData, position, season) {
   return myObject;
 }
 
+function hoverEffect() {
+  const elementos = document.querySelectorAll('.player-card');
+
+  elementos.forEach((elemento) => {
+    elemento.addEventListener('mouseenter', () => {
+      elementos.forEach((otroElemento) => {
+        if (otroElemento !== elemento) {
+          otroElemento.classList.add('blurEffect');
+        }
+      });
+    });
+
+    elemento.addEventListener('mouseleave', () => {
+      elementos.forEach((otroElemento) => {
+        otroElemento.classList.remove('blurEffect');
+      });
+    });
+  });
+}
+
 export default class TeamDetails {
   constructor(
     parentElement,
@@ -170,6 +190,7 @@ export default class TeamDetails {
     );
     await this.renderTeamSquad();
     await this.renderTeamGames();
+    hoverEffect();
   }
 
   async getTeamStatistics() {
