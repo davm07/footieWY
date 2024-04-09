@@ -147,6 +147,7 @@ export default class LeagueDetails {
     const searchInput = document.querySelector('#searchLeague');
     searchInput.addEventListener('keyup', () => {
       const searchTerm = searchInput.value;
+      state.page = 1;
       const filteredLeagues = searchLeagues(searchTerm, this.leaguesList);
       if (filteredLeagues.length > 0) {
         this.parentElement.innerHTML = '';

@@ -397,8 +397,7 @@ header {
 
 .table-leagues.divider {
   animation: none;
-  animation-timeline: none;
-  animation-range: none;
+  min-height: 75vh;
 }
 
 .table-leagues h2 {
