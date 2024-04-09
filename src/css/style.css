@@ -73,6 +73,11 @@ header {
   margin: 0;
 }
 
+.title-header a {
+  text-decoration: none;
+  color: var(--tertiary-color);
+}
+
 .line-header {
   background: radial-gradient(
     circle at center,
@@ -226,6 +231,7 @@ header {
   background-color: var(--secondary-color);
   height: 100vh;
   overflow-y: scroll;
+  overscroll-behavior-y: contain;
 }
 
 .latest-matches::-webkit-scrollbar {
@@ -529,6 +535,7 @@ td::before {
 .teamsContainer {
   width: 100%;
   overflow-x: scroll;
+  overscroll-behavior-x: contain;
 }
 
 .teamsContainer::-webkit-scrollbar {
@@ -565,6 +572,7 @@ td::before {
   gap: 1rem;
   overflow-x: scroll;
   width: 100%;
+  overscroll-behavior-x: contain;
 }
 
 .gamesContainer::-webkit-scrollbar {
@@ -756,6 +764,7 @@ td::before {
   grid-gap: 1rem;
   height: 70vh;
   overflow-y: scroll;
+  overscroll-behavior-y: contain;
   padding: 0 0.3rem;
 }
 
