@@ -270,6 +270,7 @@ export default class TeamDetails {
           this.leagueId,
           this.position,
         );
+        hoverEffect();
       });
     } else {
       const sectionElement = document.querySelector('#squad-section');
