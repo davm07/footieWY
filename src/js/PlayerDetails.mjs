@@ -17,7 +17,7 @@ const requestOptions = {
 function playerCardTemplate(player, season, leagueId, teamPosition) {
   return `<div class="player-card" data-id="${player.id}">
               <div class="player-img">
-                <img src="https://test-api-sports-davm.b-cdn.net/football/players/${player.id}.png" alt="${player.name}" loading="lazy" width="150" height="150" onerror="this.src='/images/onerror.png';">
+                <img src="https://media.api-sports.io/football/players/${player.id}.png" alt="${player.name}" loading="lazy" width="150" height="150" onerror="this.src='/images/onerror.png';">
                 <div class="player-info">
                   <a href="/player/index.html?playerId=${player.id}&leagueId=${leagueId}&season=${season}&teamPosition=${teamPosition}" class="player-link">
                     <p class="playerNameNum">${player.name} - #${player.number !== null ? player.number : 'NA'}</p>
@@ -29,7 +29,7 @@ function playerCardTemplate(player, season, leagueId, teamPosition) {
 }
 
 function playerProfile(player, teamPositon) {
-  return `<img src="https://test-api-sports-davm.b-cdn.net/football/players/${player.player.id}.png" alt="${player.player.name}" loading="lazy" width="150" height="150" onerror="this.src='/images/onerror.png';">
+  return `<img src="https://media.api-sports.io/football/players/${player.player.id}.png" alt="${player.player.name}" loading="lazy" width="150" height="150" onerror="this.src='/images/onerror.png';">
           <div class="profile-container">
             <div class="detail-container">
               <p>Birth Date</p>
@@ -54,7 +54,7 @@ function playerProfile(player, teamPositon) {
             <div class="detail-container">
               <p>Team</p>
               <div class="detail-team">
-                <img src="https://test-api-sports-davm.b-cdn.net/football/teams/${player.statistics[0].team.id}.png" alt="${player.statistics[0].team.name}" class="detail-img" loading="lazy" onerror="this.src='/images/onerror.png';">
+                <img src="https://media.api-sports.io/football/teams/${player.statistics[0].team.id}.png" alt="${player.statistics[0].team.name}" class="detail-img" loading="lazy" onerror="this.src='/images/onerror.png';">
                 <a href="/team/index.html?leagueId=${player.statistics[0].league.id}&season=${player.statistics[0].league.season}&teamId=${player.statistics[0].team.id}&position=${teamPositon}" title="Show ${player.statistics[0].team.name} page"><p class="detail-info">${player.statistics[0].team.name}</p></a>
               </div>
             </div>
@@ -65,7 +65,7 @@ function playerProfile(player, teamPositon) {
             <div class="detail-container">
               <p>League</p>
               <div class="detail-league">
-                <img src="https://test-api-sports-davm.b-cdn.net/football/leagues/${player.statistics[0].league.id}.png" alt="${player.statistics[0].league.name}" class="detail-img" loading="lazy" onerror="this.src='/images/onerror.png';">
+                <img src="https://media.api-sports.io/football/leagues/${player.statistics[0].league.id}.png" alt="${player.statistics[0].league.name}" class="detail-img" loading="lazy" onerror="this.src='/images/onerror.png';">
                 <a href="/leagues/league-detail.html?leagueId=${player.statistics[0].league.id}&season=${player.statistics[0].league.season}" title="Show ${player.statistics[0].league.name} page"><p class="detail-info">${player.statistics[0].league.name}</p></a>
               </div>
             </div>
@@ -96,15 +96,15 @@ function renderPlayerTitle(list, htmlElement) {
 function playerDataObject(playerData, position) {
   const playerId = playerData[0].player.id;
   const playerName = playerData[0].player.name;
-  const playerPhoto = `https://test-api-sports-davm.b-cdn.net/football/players/${playerId}.png`;
+  const playerPhoto = `https://media.api-sports.io/football/players/${playerId}.png`;
   const playerAge = playerData[0].player.age;
   const teamId = playerData[0].statistics[0].team.id;
   const teamName = playerData[0].statistics[0].team.name;
   const teamPosition = position;
-  const teamLogo = `https://test-api-sports-davm.b-cdn.net/football/teams/${teamId}.png`;
+  const teamLogo = `https://media.api-sports.io/football/teams/${teamId}.png`;
   const leagueId = playerData[0].statistics[0].league.id;
   const leagueName = playerData[0].statistics[0].league.name;
-  const leagueLogo = `https://test-api-sports-davm.b-cdn.net/football/leagues/${leagueId}.png`;
+  const leagueLogo = `https://media.api-sports.io/football/leagues/${leagueId}.png`;
   const playerSeason = playerData[0].statistics[0].league.season;
   const teamLeaguePage = `/leagues/league-detail.html?leagueId=${leagueId}&season=${playerSeason}`;
   const teamPage = `/team/index.html?leagueId=${leagueId}&season=${playerSeason}&teamId=${teamId}&position=${teamPosition}`;

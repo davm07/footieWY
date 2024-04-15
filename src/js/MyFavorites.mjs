@@ -11,13 +11,13 @@ function teamCardFavorite(object) {
                 <a href=${object.team_url} class="link-favorite">
                   <h3>${object.name} &#8599</h3>
                 </a>
-                <img src=${object.logo} alt=${object.name} loading="lazy" class="favorite-imgB">
+                <img src=${object.logo} alt=${object.name} loading="lazy" class="favorite-imgB" onerror="this.src='/images/onerror.png';">
               </div>
               <div class="team-wraper">
                 <a href=${object.league_url} class="link-favorite">
                   <p>${object.league_name} &#8599</p>
                 </a>
-                <img src=${object.league_logo} alt=${object.league_name} loading="lazy" class="favorite-imgS">
+                <img src=${object.league_logo} alt=${object.league_name} loading="lazy" class="favorite-imgS" onerror="this.src='/images/onerror.png';">
               </div>
             </div>
             <div class="remove-wraper">
@@ -34,20 +34,20 @@ function playerCardFavorite(object) {
                 <a href=${object.player_url} class="link-favorite">
                   <h3>${object.name} &#8599</h3>
                 </a>
-                <img src=${object.player_photo} alt=${object.name} loading="lazy" class="favorite-imgB">
+                <img src=${object.player_photo} alt=${object.name} loading="lazy" class="favorite-imgB" onerror="this.src='/images/onerror.png';">
               </div>
               <div class="player-wraper team-league">
                 <div class="inside-wraper">
                   <a href=${object.team_url} class="link-favorite">
                     <p>${object.team_name} &#8599</p>
                   </a>
-                  <img src=${object.team_logo} alt=${object.team_name} loading="lazy" class="favorite-imgS">
+                  <img src=${object.team_logo} alt=${object.team_name} loading="lazy" class="favorite-imgS" onerror="this.src='/images/onerror.png';">
                 </div>
                 <div class="inside-wraper">
                   <a href=${object.league_url} class="link-favorite">
                     <p>${object.league_name} &#8599</p>
                   </a>
-                  <img src=${object.league_logo} alt=${object.league_name} loading="lazy" class="favorite-imgS">
+                  <img src=${object.league_logo} alt=${object.league_name} loading="lazy" class="favorite-imgS" onerror="this.src='/images/onerror.png';">
                 </div>
               </div>
             </div>
